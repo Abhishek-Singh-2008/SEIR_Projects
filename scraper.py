@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-# It will take URL from command line
+# Below is the code for single url
 if len(sys.argv)==2:
 
   url = sys.argv[1]
@@ -11,8 +11,6 @@ if len(sys.argv)==2:
     url="https://"+url
 
   response = requests.get(url)
-
-  # It will create soup of texts using html parser
   soup = BeautifulSoup(response.text, "html.parser")
 
   print(f"PAGE TITLE WITHOUT ANY HTML TAG:{soup.title.text} \n")
@@ -38,17 +36,13 @@ if len(sys.argv)==2:
           print(full_url)
 
 
-
+# Below is the code for the bit comparision of two urls
 elif len(sys.argv) == 3:
 
   url = sys.argv[2]
-  # if not url.startswith("http"):
-  #   url="https://"+url
   def Simhash_code(urls):
     response = requests.get(urls)
     soup = BeautifulSoup(response.text, "html.parser")
-
-    
     print("PAGE TITLE: \n")
     print(soup.title.string)
     print()
@@ -147,4 +141,5 @@ elif len(sys.argv) == 3:
   for i in range(64):
     if hashcode_1[i]==hashcode_2[i]:
       count+=1
+
   print(f"                       {count} bits are common in given two documents")
